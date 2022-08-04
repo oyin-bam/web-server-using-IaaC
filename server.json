@@ -1,0 +1,43 @@
+{
+	"variables": {
+		"subscription_id": "0b996307-7c6a-462a-990b-568412d43da3",
+		"client_id": "73934cf5-3852-4aea-bf96-0deb9791adbd",
+		"client_secret": "LMG8Q~WRhPyAVN6gFkeP2U8KR6GW7h9GTelTLbaW",
+		"tenant_id": "268cc3e5-9f15-4e1e-b318-a6774f3d6416",
+		"resource_group_name": "oyinbam-packer-rg"
+	},
+	
+	"builders": [{
+		"type": "azure-arm",
+	
+		"client_id": "{{user `client_id`}}",
+		"client_secret": "{{user `client_secret`}}",
+		"tenant_id": "{{user `tenant_id`}}",
+		"subscription_id": "{{user `subscription_id`}}",
+	
+		"os_type": "Linux",
+		"image_publisher": "Canonical",
+		"image_offer": "UbuntuServer",
+		"image_sku": "18.04-LTS",
+	
+		"managed_image_resource_group_name": "{{user `resource_group_name`}}",
+		"managed_image_name": "bambamPackerVMImage",
+	
+		"location": "East US",
+		"vm_size": "Standard_B1s",
+		"azure_tags": {
+			"project_stage":"development"
+		}
+	}],
+	"provisioners": [{
+		"inline": [
+			"apt-get update",
+			"apt-get upgrade -y",
+			"echo 'Hello, World!' > index.html",
+			"nohup busybox httpd -f -p 80 &"
+		],
+		"inline_shebang": "/bin/sh -x",
+		"type": "shell"
+	}],
+	"sensitive-variables": ["subscription_id", "client_id", "client_secret", "tenant_id"]
+}
