@@ -1,9 +1,9 @@
 {
 	"variables": {
-		"subscription_id": "0b996307-7c6a-462a-990b-568412d43da3",
-		"client_id": "73934cf5-3852-4aea-bf96-0deb9791adbd",
-		"client_secret": "LMG8Q~WRhPyAVN6gFkeP2U8KR6GW7h9GTelTLbaW",
-		"tenant_id": "268cc3e5-9f15-4e1e-b318-a6774f3d6416",
+		"subscription_id": "{{env `SUBSCRIPTION_ID`}}",
+		"client_id": "{{env `CLIENT_ID`}}",
+		"client_secret": "{{env `CLIENT_SECRET`}}",
+		"tenant_id": "{{env `TENANT_ID`}}",
 		"resource_group_name": "oyinbam-packer-rg"
 	},
 	
